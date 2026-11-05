@@ -255,7 +255,7 @@ function NotFound() {
 }
 function App() {
   const path = window.location.pathname.replace(/\/index\.html$/, "/") || "/";
-  const project = projects.find((p) => path === `/projects/${p.id}.html`);
+  const project = projects.find((p) => path.replace(/\/$/, "").replace(/\.html$/, "") === `/projects/${p.id}`);
   const Component = nav.find(([, url]) => url === "/" ? path === "/" : path.replace(/\/$/, "") === url.slice(0, -1))?.[2];
   const isNotFound = !Component && !project;
   const page = Component ? <Component /> : project ? <ProjectPage project={project} /> : null;
